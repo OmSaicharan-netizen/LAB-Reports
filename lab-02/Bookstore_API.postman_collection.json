@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "c1f8a8b2-3e4d-4a1b-9f2c-5b8d6e7f0a1c",
+		"name": "Bookstore API (Lab 2)",
+		"description": "Postman Collection for ADV DBMS Lab 2 - SQLite CRUD API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. GET All Books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Fetch all books ordered by id"
+			},
+			"response": []
+		},
+		{
+			"name": "2. GET Single Book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/3/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"3",
+						""
+					]
+				},
+				"description": "Fetch a single book by bookId"
+			},
+			"response": []
+		},
+		{
+			"name": "3. POST Add Book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Refactoring\",\n  \"author\": \"Martin Fowler\",\n  \"price\": 4599,\n  \"pages\": 448\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Add a new book"
+			},
+			"response": []
+		},
+		{
+			"name": "4. PUT Update Book",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Refactoring 2nd Ed\",\n  \"author\": \"Martin Fowler\",\n  \"price\": 4799,\n  \"pages\": 448\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/books/11/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"11",
+						""
+					]
+				},
+				"description": "Update an existing book"
+			},
+			"response": []
+		},
+		{
+			"name": "5. DELETE Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/11/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"11",
+						""
+					]
+				},
+				"description": "Delete a book by bookId"
+			},
+			"response": []
+		},
+		{
+			"name": "6. GET Non-Existent Book (404)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/books/9999/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"books",
+						"9999",
+						""
+					]
+				},
+				"description": "Verify 404 response for missing book"
+			},
+			"response": []
+		}
+	]
+}
