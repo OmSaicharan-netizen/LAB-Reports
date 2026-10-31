@@ -10,7 +10,7 @@
 
 ## 🔗 Live Link
 
-> **Not deployed** — SQLite uses a local file-based database that cannot be served on stateless platforms (Render / Railway) without a persistent-disk add-on. Postman screenshots of every endpoint are provided in the [`screenshots/`](./screenshots/) folder instead.
+https://lab-02-henna.vercel.app/books
 
 ---
 
