@@ -1,4 +1,4 @@
-# LAB-Report-2 — Advanced DBMS Lab Repository
+# LAB-Reports — Advanced DBMS Lab Repository
 
 One repository for the entire course.  Each lab lives in its own sub-folder.
 
