@@ -1,0 +1,17 @@
+Add your Postman screenshots here and name them exactly as referenced in README.md:
+
+  01_get_all_books.png    → GET /books/        (200 — list of 10 books)
+  02_get_single_book.png  → GET /books/3/      (200 — single book JSON)
+  03_post_add_book.png    → POST /books/       (201 — new bookId returned)
+  04_put_update_book.png  → PUT /books/:id/    (200 — "Book updated successfully")
+  05_delete_book.png      → DELETE /books/:id/ (200 — "Book deleted successfully")
+  06_404_not_found.png    → GET /books/9999/   (404 — "Book not found")
+  07_sqlite_cli_verify.png→ SQLite CLI showing rows before/after changes
+
+Steps:
+1. Run:  npx nodemon app.js
+2. Open Postman and hit each endpoint.
+3. Screenshot the response panel (include URL + status code in the frame).
+4. For the CLI screenshot: open a second terminal, run  sqlite3 bookstore.db
+   then  SELECT * FROM book;  after a POST/PUT/DELETE.
+5. Replace this file with the actual PNG images.
