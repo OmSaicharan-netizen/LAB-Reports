@@ -168,12 +168,15 @@ Solution: Encapsulated server startup in an initializeDBAndServer() async functi
 ## 💡 Viva Q&A (Quick Reference)
 
 1. Why await the database call?
+
 Database interactions (such as reading from or writing to books.db) involve asynchronous filesystem I/O operations and return a JavaScript Promise.
 If we do not await the call, JavaScript continues synchronous execution immediately and sends an empty response or an unresolved Promise object before the data is retrieved.
 Using await pauses execution of the async route handler until the database finishes its operation, ensuring that accurate results or errors are returned to the client.
 2. What is SQL injection and how do placeholders prevent it?
+
 SQL Injection: A vulnerability where an attacker injects malicious SQL statements into input fields (e.g., ' OR '1'='1). If strings are concatenated directly into the query, the SQLite engine parses the input as executable commands, potentially exposing, modifying, or deleting entire tables.
 How Placeholders Prevent It: The ? placeholder indicates to the database driver that the value should be pre-compiled and treated strictly as literal data, never as executable SQL code. Special characters are automatically sanitized.
 3. When is PUT used instead of POST?
+
 POST is used to create a new resource. It is non-idempotent: submitting the same POST request multiple times creates multiple distinct database rows with new auto-incremented primary keys.
 PUT is used to update or replace an existing resource at a specific identifier (/books/:bookId/). It is idempotent: executing the same PUT request multiple times with identical data results in the exact same state in the database without duplicate records.
