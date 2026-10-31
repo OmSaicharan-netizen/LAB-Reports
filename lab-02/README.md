@@ -51,7 +51,7 @@ npm start
 npm run dev
 ```
 
-Server starts at **http://localhost:3000**
+Server starts at **http://localhost:3000/books/**
 
 ---
 
