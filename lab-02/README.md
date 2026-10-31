@@ -31,7 +31,7 @@ This project has **no required environment variables**. The server runs on port 
 
 > If you need a different port, set `PORT` before starting:
 > ```
-> PORT=4000
+> PORT=3000
 > ```
 > _(no `.env` file is committed; never commit secrets)_
 
