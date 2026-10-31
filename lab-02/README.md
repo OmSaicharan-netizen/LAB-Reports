@@ -1,8 +1,10 @@
 # Lab 2: SQLite Database and CRUD Routes
 
-**Name:** Om Sai Charan
-**Registration Number:** 23BD1A05XX _(update before submission)_
-**Section:** Section X _(update before submission)_
+**Name:** Om Sai Charan Manchani
+
+**Registration Number:** 252U1R9090
+
+**Section:** CSE GENAI 2B-111
 
 ---
 
