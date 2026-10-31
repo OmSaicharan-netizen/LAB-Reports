@@ -150,22 +150,30 @@ lab-02/
 
 ## 📝 Notes — Problems Faced & How They Were Solved
 
-| Problem | Solution |
-|---------|----------|
-| `npm` blocked by PowerShell execution policy | Used `cmd /c "npm install ..."` to bypass the PS restriction |
-| Localhost unreachable between sandbox processes | Tested DB logic in-process; confirmed via `db.all()` / `db.run()` directly |
-| `sqlite3` native bindings on Windows | Installed `sqlite` (promise wrapper) + `sqlite3` together; bindings compiled via `node-gyp` automatically |
-| `nodemon` not found globally | Added to `devDependencies` and invoked via `npx nodemon app.js` |
+Problems Faced and How You Solved Them
+Nodemon Auto-Restart Loop on SQLite Writes:
 
+Problem: Nodemon by default monitors all files in the directory. Whenever POST, PUT, or DELETE wrote data into books.db or its journal files, nodemon detected file modification and immediately restarted the server mid-request.
+Solution: Created nodemon.json configured with "ignore": [".db", ".db*", "test_routes.js", "node_modules/**"] so database writes do not trigger unwanted server restarts.
+Preventing SQL Injection in Query Construction:
+
+Problem: Concatenating user inputs into SQL strings via template literals (${bookId}) creates severe SQL injection vulnerabilities.
+Solution: Used parameter placeholder syntax (?) across every route (db.get(sql, [bookId]), db.run(sql, [title, author, price, pages])). This ensures user inputs are strictly handled as data literals by the database driver.
+Database Connection Synchronization Before Server Start:
+
+Problem: If incoming HTTP traffic arrives before the asynchronous SQLite file connection completes, route handlers fail with null reference errors on db.
+Solution: Encapsulated server startup in an initializeDBAndServer() async function that awaits the SQLite connection before invoking app.listen().
 ---
 
 ## 💡 Viva Q&A (Quick Reference)
 
-**Q: Why `await` the database call?**
-`open()` and all `db.*` methods return Promises — the actual I/O is asynchronous. Without `await` the code would continue before the data is ready, giving undefined results or race conditions.
-
-**Q: What is SQL injection and how do placeholders prevent it?**
-SQL injection is when a malicious user embeds SQL commands in user input (e.g. `1 OR 1=1`). Parameterised queries (`?` placeholders) pass values to the SQLite driver separately; the driver escapes them so they are always treated as *data*, never as executable SQL.
-
-**Q: When is PUT used instead of POST?**
-`POST` is used to *create* a new resource at a server-chosen URL. `PUT` is used to *replace* a known resource at a client-specified URL. `PUT` is also **idempotent** — calling it multiple times with the same payload leaves the resource in the same final state, whereas `POST` may create duplicates.
+1. Why await the database call?
+Database interactions (such as reading from or writing to books.db) involve asynchronous filesystem I/O operations and return a JavaScript Promise.
+If we do not await the call, JavaScript continues synchronous execution immediately and sends an empty response or an unresolved Promise object before the data is retrieved.
+Using await pauses execution of the async route handler until the database finishes its operation, ensuring that accurate results or errors are returned to the client.
+2. What is SQL injection and how do placeholders prevent it?
+SQL Injection: A vulnerability where an attacker injects malicious SQL statements into input fields (e.g., ' OR '1'='1). If strings are concatenated directly into the query, the SQLite engine parses the input as executable commands, potentially exposing, modifying, or deleting entire tables.
+How Placeholders Prevent It: The ? placeholder indicates to the database driver that the value should be pre-compiled and treated strictly as literal data, never as executable SQL code. Special characters are automatically sanitized.
+3. When is PUT used instead of POST?
+POST is used to create a new resource. It is non-idempotent: submitting the same POST request multiple times creates multiple distinct database rows with new auto-incremented primary keys.
+PUT is used to update or replace an existing resource at a specific identifier (/books/:bookId/). It is idempotent: executing the same PUT request multiple times with identical data results in the exact same state in the database without duplicate records.
