@@ -10,7 +10,7 @@
 
 ## Live Link
 
-**Deployment URL:** https://YOUR-DEPLOYMENT-URL
+**Deployment URL:** [https://YOUR-DEPLOYMENT-URL](https://bdf-lab-03-api.onrender.com)
 
 (If the project cannot be deployed, write the reason here and rely on the Postman screenshots below.)
 
