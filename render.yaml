@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bdf-lab-03-api
+    runtime: node
+    plan: free
+    rootDir: lab-03
+    buildCommand: npm install && npm run setup
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.20.0
