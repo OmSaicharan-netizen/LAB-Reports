@@ -1,0 +1,19 @@
+{
+  "name": "lab-03",
+  "version": "1.0.0",
+  "description": "Lab 3: REST API, query parameters, validation, debugging",
+  "main": "index.js",
+  "scripts": {
+    "setup": "node setupDb.js",
+    "start": "node index.js",
+    "test:routes": "node test_routes.js"
+  },
+  "keywords": ["nodejs", "express", "sqlite", "rest-api"],
+  "author": "OM SAI CHARAN MANCHANI",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}
